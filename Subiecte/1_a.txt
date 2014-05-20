@@ -1,0 +1,19 @@
+Retele cu difuzare
+------------------
+
+-un singur canal de comunicatie care este protejat de toate masinile din retea
+-orice masina poate trimite pachete care sunt primite de toate celelalte masini
+-pachetul are un camp de adresa. O masina verifica acel camp de adresa si daca ii este destinat, il preia, daca nu il ignora.
+-unpachet poate sa aiba un cod special in campul de adresa care semnifica ca este pentru toate masinile. Acest procedeu se numeste difuzare.
+-unele sisteme de difuzare suporta transmisia multipla. una din schemele posibile pentru realizarea acestui procedeu este rezervarea unui bit pentru a indica transmiterea multipla. restul de n-1 pot forma un numar de grup. O masina se poate abona la orice grup sau la toate grupurile. Un pachet transmis unui grup ajunge la toate masinile abonate la grupul respectiv.
+
+Retele cu difuzare: 
+1) statice: canalul este alocat static, timpul este divizat in intervale discrete si este rulat un algoritm round-robin(fiecare masina emite atunci cand ii vine randul). Alocarea statica face ca timpul in care o masina nu transmite in coanta de timp alocata si fie pierdut.
+2) dinamice: - centralizate: Exista o singura entitate care determina cine urmeaza la rand. Face asta acceptand cereri si luand o decizie conform unui algoritm intern.
+			 - descentralizate: fiecare masina trebuie sa hotarasca pentru ea insasi daca sa transmita sau nu.
+
+Retele punct-la-punct:
+-dispun de numeroase conexiuni intre perechi de masini individuale
+-in acest tip de retele, pentru a ajunge la destinatie, un pachet ar putea sa treaca prin mai multe masini intermediare. Cum exista mai multe trasee descoperirea celui optim este foarte importanta.
+-retelele mai mici tind sa utilizeze difuzarea iar cele mari sunt de obicei punct la punct.
+-transmisiile punct la punct cu un singur transmitator si un singur receptor sunt numite uneori si unicosting.

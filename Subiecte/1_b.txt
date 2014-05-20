@@ -1,0 +1,19 @@
+Retele locale
+-------------
+-sunt retele de dimensiune mica, folosite(si in general in campusuri si cladiri de birouri pentru a putea partaja resurse (imprimante, etc.))
+-se disting de celelalte prin:
+->marime(dimensiune restrinsa, timpul de transmisie cel mai defavorabil este cunoscut)
+->tehnologie de transmisie(un cablu la care sunt atasate toate masinile)
+->topologie(au viteze cuprinse intre 10mps si 10gbs cu intarzieri mici si erori putine)
+
+Topologii: magistrala: ______[]____[]____[]____[]____[]____[]____
+		   inel: la fel, la in cerc, si inchis
+
+Retea cu magistrala
+-------------------
+-intr-un moment cel mult o masina este master si are voie sa transmita(restul nu pottransmite)
+-cand 2 masini vor sa transmita simultan, este necesar un mecanism de arbitrare. Mecanismul de arbitrare poate fi centralizat sau distribuit, descentralizat.
+Exemplu: Ethernet TM o o retea cu difuzare bazata pe magistrala cu control descentralizat cu viteza intre 10mps si 10gbps. Calculatoarele dintr-un enthernet pot transmite oricand doresct, daca 2 sau mai multe pachete se ciocnesc fiecare calc asteapta un interval aleator de timp si apoi incearca iar.
+
+Retele larg raspandite geografic (WAN)
+--------------------------------------
