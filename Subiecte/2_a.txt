@@ -1,0 +1,22 @@
+Nivelul legatura date
+---------------------
+
+indeplineste urm functii
+-furnizarea unei interfete bine-definite catre nivelul retea
+-tratarea erorilor de transmisie
+-reglarea fluxului cadrelor in asa fel incat receptorii lenti sa nu fie inundati de catre emitatorii rapizi
+
+-primeste pachete de la nivelul retea pe care le incapsuleaza in cadre in vederea retransmiterii
+
+Servicii oferite de nivelul retea
+---------------------------------
+
+-transferul datelor de la nivelul retea al masinii sursa la nivelul retea al masinii destinatie.
+-serviciul neconfirmat fara conexiune: masina sursa transmite cadre independente catre masina destinatie, fara ca masina destinatie sa tr sa confirme primirea lor/
+-serviciul confirmat fara conexiune: fiecare cadru trimis este confirmat individual
+-serviciul confirmat orientat-conexiune: masinile sursa stabilesc o conexiune inainte de a transfera date. Fiecare cadru este numerotat si nivelul legatura de date garanteaza a i fiecare cadru trimis este intr-adevar receptionat.
+
+Incadrarea
+----------
+
+Sparge sirul de biti in cadre discrete si calculeaza suma de control pentru fiecare cadru. Cand un cadru ajunge ca destinatie suma este recalculabila. Daca noua suma de control este diferita de cea continua in cadru, nivelul legatura de date stie ca a aparut o eroare si face operatiile necesare pentru a o rezolva.

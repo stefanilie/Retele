@@ -1,0 +1,15 @@
+Protocol simplex fara restrictii
+--------------------------------
+-Consta in 2 proceduri distincte, una de emisie si cealalta de receptie. Emitatorul lucreaza la nivelul legatura de date al masinii sursa, iar receptorul la nivelul de date al masinii de destinatie.
+-Emitatorul este intr-un ciclu infinit care doar insereaza datele pe linie cat poate de repede. Ciclul consta din 3 actiuni: prelucrarea unui pachet de date de la nivelul retea, construirea unui cadru de iesire si trimiterea cadrului pe drumul sau.
+-receptorul asteapta sosirea unui cadru. Cand ajunge.
+"wait for event" se intoarce cu event setat la "frame-arrived".
+Apelul rutina "from_physical_layer" muta cadrul in zona tampon. Pachetul este transmis nivelului retea si nivelul legatura de date revine la starea de asteptare a cadrului urmator.
+
+
+//TODO: add code here
+
+Protocol stop and wait
+----------------------
+
+Principala problema e sa vedem inundarea receptorului de catre emitator. De asemenea are un tampon de capacitate limitata.

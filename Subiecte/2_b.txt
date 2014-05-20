@@ -1,0 +1,9 @@
+Controlul erorilor
+------------------
+
+-atunci cand emitatorul trimite un cadru porneste de obicei un contolr de timp. Contorul de timp este setat sa expire dupa un interval suficient de lung pentru ca acel cadru sa poata ajunge la destinatie, sa fie prelucrat acolo si confirmarea sa se propage inapoi catre emitator. Daca fie cadrul, fie confirmarea se pierd si intervalul de timp expira, emitatorul retransmite cadrul. Pentru a evita receptionarea unui cadru de mai multe ori atribuim numere de secventa cadrelor de iesire.
+
+Controlul fluxului
+------------------
+-bazat pe reactie: receptorul acorda emitatorului permisiunea de a mai transmite date, sau cel putin comunica emitatorului inf despre starea sa
+-bazat pe rata: protocolul dispune de un mecanism integrat care limiteaza rata la care emitatorul poate transmite, fara a folosi inf de la receptor.
