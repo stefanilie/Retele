@@ -16,4 +16,14 @@ Retea cu magistrala
 Exemplu: Ethernet TM o o retea cu difuzare bazata pe magistrala cu control descentralizat cu viteza intre 10mps si 10gbps. Calculatoarele dintr-un enthernet pot transmite oricand doresct, daca 2 sau mai multe pachete se ciocnesc fiecare calc asteapta un interval aleator de timp si apoi incearca iar.
 
 Retele larg raspandite geografic (WAN)
---------------------------------------
+---------------------------------------
+- o tara/continent
+-are o colectie de masini utilizate pentru a executa programele utilizatorilor - masini gazde
+- gazdele sunt conectate printr-o subretea de comunicatie (subredea)
+- gazdele apartin clientilor dar subreteaua apartine si este exploatata de o companie de telefonie sau de un furnizor de servicii internet (ISP)
+- sarcina subretelei este de a transmite mesajele de la gazda la gazda(asa cum sistemul telefonic transmite cuvintele de la vorbitor la ascultator)
+- subreteaua este formata din: Liniile de transmisie si elementele de comunicare
+
+Liniile de transmisie transporta bitii intre masini. Ele pot si alcatui din fibre de cupru, fibra optica sau chiar leg radio
+Elementele de comunicare sunt calculatoare specializate folosite pentru a conecta doua sau mai multe linii de transmisie
+-cand sosesc date pe o anumita linie, elementul de comutare trebuie sa aleaga o noua linie pentru a retransmite datele(router).

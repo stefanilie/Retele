@@ -1,0 +1,54 @@
+Niveluri, protocoale
+--------------------
+-nivelul n al unei masini comunica cu nivelul n al unei masini
+-regulile si conventiile utilizate in conversatie sunt cunoscute sub numele de protocolul nivelului n
+-un protocol reprezinta o intelegere intre partile care comunica, asupra modului de realizare a comunicarii
+-entitatile de pe niveurile corespondente se numesc egale. Entitatile egale pot fi procese, dispozitive hardware, sau chiar fiinte umane. Cu alte cuvinte, entitatile egale sunt cele care comunica folosind protocolul.
+
+Proiectare si arhitectura
+-------------------------
+-nici un fel de date nu sunt transferate direct de pe nivelul n al unei masini pe nivelul n al altei masini. Fiecare nivel tranfera datele si informatiile de control nivelului incarcat inferior pana cand se ajunge la nivelul cel mai de jos. Sub nivelul 1 se afla nivelul fizic prin care se produce comunicarea efectivei
+-intre 2 niveluri adiacente exista o interfata
+-interfata defineste ce operatii si servicii primitive ofera nivelul de jos catre nivelul de sus.
+
+Proiectare
+-implica cate nivele sa includa, rolul lor, precum si definirea interfetelor dintre ele.
+-fiecare nivel executa o colectie specifica de functii clar definite 
+-minimizarea volumului de informatii care trebuie transformate intre niveluriș interfetele clare permit o mai simpla inlocuire a unui nivel cu implementare 
+-tr sa furnizeze exact setul de valori pe care il furnizeaza si cea veche
+
+Arhitectura de retea
+--------------------
+-o multime de niveluri si protocoale este numita arhitecturii de retea. Specificatia unei arhitecturi tr sa contina destule informatii pentru a permite unui proiectant sa scrie programele, sau sa construiasca echipamentele necesare fiecarui nivel, a.i. nivelurile sa interp. corect protocoalele coresp.
+-detaliile de implementare si specificatiile interfetelor nu fac parte din arhitectura, deoarece acestea sunt ascunse in int masinilor si nu sunt vizibile din afara. Nu este necesar nici macar ca interfetele de pe masinile dintr-o retea sa fie aceeasi.
+
+Probleme de proiectare a nivelurilor
+------------------------------------
+-fiecare nivel are nevoie de un mecanism pentru a identifica emitatorii si receptorii
+-controlul erorilor este o problema imp. deoarece circuitele fizice de comunicatii nu sunt perfecte.
+-o problema evidenta este cea in care receptorul este mai lent ca emitatorul.
+-incapacitatea tuturor proceselor de a accepta mesaje de lungime arbitrara.
+-cand sunt mai multe cai, trebuie ales un anumit drum.
+
+Principiile OSI
+---------------
+1. Un nivel tr creat cand este nevoie de un nivel de abstractizare diferit.
+2. Fiecare nivel tr sa indeplineasca un rol definit.
+3. Functia fiecarui nivel trebuie aleasa acordandu-se atentie definirii de protocoale standardizate pe plan international.
+4. Delimitarea nivelurilor tr facuta a.i. sa se minimizeze fluxul de inf. prin interfete.
+5. Nr de niveluri tr sa fie suficient de mare sa nu fie nevoie sa se introduca in acelasi nivel functii diferite si suficient de mic pt ca arhitectura sa ramana functionala.
+
+FIZIC-transmiterea bitilor printr-un canal de comunicare
+  |
+LEGATURI DE
+	DATE    - transforma un mijloc oarecare de transmisie intr-o linie care sa fie disponibila nivelului retea fara erori nedetectate.
+	|
+RETEA-se ocupa de controlul functionarii subretelei
+  |
+TRANSPORT - accepta date de la sesiuni, le descompune si se asigura ca toate au ajuns corect la nivelul retea.
+   |
+SESIUNE - permite utilizatorilor de pe masini diferite sa stabileasca sesiuni intre ei
+   |
+PREZENTARE - sintaxa si semantica inf. transmisa
+   |
+Aplicatie - protocoale frecvent utilizate (HTTP, WWW)
