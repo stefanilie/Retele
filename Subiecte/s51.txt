@@ -1,0 +1,57 @@
+----Subiectul 5----
+
+-pentru ca adresele IP sunt greu de invatat de catre utilizatori si pentru ca uneori furnizorul de servicii schimba IP-ul s-a inventat DNS(domain name system)
+-este pastrata o baza gigantica de date alcatuite din nume si IP
+-pentru a stabili corespondenta dintre un nume si o adresa IP, programul de aplicatie apeleaza o procedura de biblioteca numita resolver, transformandu-i numele ca paramentru. Resolverul trimite un pachet UDP la serverul DNS local, care cauta numele si returneaza adresa IP catre resolver, care o returneaza apelantului. Cu adresa IP programul poate sa stabileasca o conexiune TCP
+
+--Spatiul de nume DNS
+
+-internetul este divizat in peste 200 de domenii de nivel superior. Fiecare domeniu este partitionat in subdomenii s.a.m.d (ca un arbore)
+-primul nivel : - generice( .com (comercial) , .edu ( educational) , .gov (guvernamental) si .org ( organizatii non profit)
+                - de tari ( o intrare pentru fiecare tara)
+-de atunci s-au mai adaugat si alte domenii de nivel (
+-calea prin arbore trebuie specificata prin puncte de exemplu : eng.sun.com
+-acest lucru este necesat pentru a nu se intra in conflict cu nume de genul eng.yale.edu ( dep de engleza de la Yale)
+-numele sunt : absolute (se termina cu . ex: eng.sum.com.)
+               relative ( fara punct la sfarsit : eng.sum.com )
+-numele au maxim 63 de caractere. Cu tot cu cale maxim 256 caractere.
+-nu conteaza daca e litera mare sau mica
+-pentru a crea un nou domeniu se cere permisiunea domeniului in care va fi inclus
+-odata ce un domeniu a fost inregistrat el poate crea subdomenii fara a cere permisiunea cuiva din partea superioara a arborelui.
+
+--Inregistrari de resurse
+
+-fiecarui domeniu ii este asociata o multime de inregistrari de resurse ( resource records).
+-cea mai obisnuita inregistrare de resursa este adresa IP
+-o inregistrare de resursa ese un 5-tuplu. Adevarata functie a DNS ese sa realizeze corespondenta dintre numele de domenii si inregistrarile de resurse.
+- Nume_domeniu Timp_de_viata  Clasa  Tip Valoare
+
+-Nume_domeniu precizeaza domeniul caruia i se aplica aceasta inregistrare
+-Timp_de_viata- indicatie despre cat de stabila este inregistrarea 
+-Clasa - pt informatiile legate de internet este "IN"
+-Tip - precizeaza tipul inregistrarii
+-$$$Valoare$$$$ - poate sa fie un numar, nume de domeniu, sir ASCII
+
+
+----------------------------------------------------------------------------------
+|  Tip       Semnificatie                           Valoare                       |
+----------------------------------------------------------------------------------
+|  SOA	 |   Start autoritate              |   Parametrii pentru aceasta zona     |
+|   A    |   Adresa IP a unui sistem gazda |   Intreg pe 32 de biti               |
+|  MX    |    Schimb de posta              |    Prioritate,domeniu dispus pt posta|
+|   NS   |   Server de nume                |   Numele serverului pentru acest dom |
+|  CNAME |   Nume canonic                  |   Numele domeniului                  |
+|  PTR   |   pointer                       |   Pseudonim pt IP                    | 
+|  NINFO |   Descriere sistem gazda        |   Unitate centrala si SO             |
+|  TXT   |    Text                         |   Text ASCII neinterpretat           |
+-----------------------------------------------------------------------------------
+
+--Servere de nume
+
+-Pentru a evita probleme asociate cu existenta unei singure surse de inf, spatiul de nume DNS este impartit in zone care nu se suprapun
+-impartirea unei zone ramane la latitudinea administratorului ei.
+-cand un resolver are o cerere referitoare la un nume de domeniu el transfera cererea unuia din serverele locale de nume.
+-o inregistrare autorizata este cea care vine de la autoritatea care administreaza inregistrarea si este intotdeauna corecta.
+-daca local nu este disponibila nicio informatie despre domeniul cerut, atunci serverul de nume trimite un mesaj de cerere la serverul de nume de pe primul nivel al domeniului solicitat.
+-informatia care vine inapoi este pusa in memoria ascunsa. Cum orice modificare face inregistrarea din memoria ascunsa inutila, aceste inregistrari au campul Timp_de_viata
+-modul acesta de interogare se numeste interogare recursiva
