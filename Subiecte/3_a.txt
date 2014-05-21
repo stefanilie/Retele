@@ -1,0 +1,14 @@
+
+-Legatura de date asigura comunicarea corecta intre oricare 2 noduri adiacente unei retele de calculatoare.
+-transferul datelor intre 2 noduri neadiacente utilizeaza mai multe legaturi puse cap la cap.
+-rolul de releu este indeplinit de nivelul retea.
+-principala functie este de a transmite intre oricare 2 noduri a pachetelor pe cai conventional alese.
+-fiecare pachet recetptionat de un nod este inspectat, determinat nodul destinatar. Se alege apoi legatura convenabila, pachetul fiind transmis in continuare pe aceasta legatura. Daca reteaua este ocupata, pachetul este pus intr-o coada de asteptare si va fi transmis mai tarziu.
+-o alta functie este furnizarea unui mecanism uniform de adresare pentru nivelul transport 
+-> orientare pe conexiuni
+->neorientare pe conexiuni.
+
+Serviciile orientate pe conexiuni:
+----------------------------------
+-stabilirea sau desfiintarea unei conexiuni.
+-ransferul n
