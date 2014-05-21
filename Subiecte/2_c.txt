@@ -13,3 +13,4 @@ Protocol stop and wait
 ----------------------
 
 Principala problema e sa vedem inundarea receptorului de catre emitator. De asemenea are un tampon de capacitate limitata.
+

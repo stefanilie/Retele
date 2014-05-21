@@ -1,12 +1,15 @@
-class Hamming{
+import math
+
+class Hamming:
+
+	@staticmethod
+	def is2pow(num):
+		return ((num & (num - 1)) == 0) and num != 0
+
 	
-	def is2pow(x):
-		@staticmethod
-		while (((x&1) == 0) and x > 1)	
-			x >> 1
-		if(x==1) return true
-		return false
-	def readData(){
+	def readData():
+		print "Algoritmul Hamming(7, 4)"
+		print "Introduceti cei 4 biti de date: d1, d2, d3, d4"
 	
-	}
-}
+print Hamming.is2pow(4);
+print Hamming.is2pow(5);

@@ -1,0 +1,13 @@
+Protocol cu fereastra glisanta
+------------------------------
+
+-esenta protocoalelor cu fereastra glisanta este aceea ca, la orice moment de timp emitatorul mentine o multime de nr de secventa care corespund cadrelor pe care are permisiunea sa le trimita. Se spune ca aceste cadre apartin ferestrei de transmisie(sending window). Similar receptorul mentine o fereastra de receptie ce corespunde multimii de cadre care pot fi acceptate
+-numerele de secventa repr cadre transmise sau cadre ce pot fi transmise, dar neconfirmate.
+-daca fereastra creste la dimensiunea maxima, nivelul legatura de date al emitatorului trebuie sa forteze inchiderea nivelului retea pana cand se elibereaza un tampon.
+-receptorul nu trimite cadrul de confirmare imediat, el asteapta un pachet de la nivelul retea. Confirmarea ii este atasata cadrului de iesire. Daca dupa un nr prestabilit de secunde nu primeste un cadru de la retea atunci trimite un cadru de confirmare.
+-cand receptorul mentioneaza un cadru al carui nr de secventa este egal cu marginea inf a ferestrei, acesta este trimis nivelului retea, este generata o confirmare si fereastra se deplaseaza cu o unitate.
+
+Protocol de revenire in n pasi
+------------------------------
+-emitatorul trimite un numar w de cadre cand distanta de propagare a pachetelor este mare.
+-daca pe parcurs apare o eroare receptorul elimina par si simplu cadrele care urmeaza, netrimitand confirmari pentru cadrele eliminate. Fara confirmare timpul expira iar emitatorul transmite in ordine toate cadrele iar.
