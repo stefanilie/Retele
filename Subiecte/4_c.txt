@@ -1,0 +1,37 @@
+-c. Elemente de performanta
+-În retelele de calculatoare sunt foarte importante elementele de performanta. Atunci când sunt interconectate sute sau mii de calculatoare, au loc adesea interactiuni complexe cu consecinte nebanuite. Aceasta complexitate conduce în mod frecvent la performante slabe fara ca cineva sa stie de ce.
+-Exista cinci aspecte de performanta ale retelei:
+-1. Probleme de performanta.
+-2. Masurarea performantei retelei.
+-3. Proiectarea de sistem pentru performante mai bune.
+-4. Prelucrarea rapida TPDU.
+-5. Protocoale pentru retele viitoare de mare performanta.
+-
+-1.	Probleme de performanta.
+-Unele probleme de performanta, cum este congestia, sunt cauzate de supraîncarcarea temporara a resurselor. Performantele se degradeaza de asemenea în cazul unei dezechilibrari structurale a balantei resurselor.
+-Supraîncarcarea poate fi de asemenea initiata în mod sincron. De exemplu, daca un TPDU contine un parametru eronat (de exemplu portul pentru care este destinat), în multe cazuri receptorul va înapoia cu multa grija un anunt de eroare.
+- Un al doilea exemplu de supraîncarcare sincrona este dat de efectele unei caderi a energiei electrice. Odata cu revenirea curentului, toate masinile executa programul ROM de reinitializare. O secventa tipica de reinitializare poate cere în primul rând unui anume server (DHCP) identitatea
+-precisa a masinii, apoi poate cere unui server de fisiere o copie a sistemului de operare. Daca sute de masini executa acest lucru simultan, serverul va ceda probabil la aceasta încarcare.
+-Chiar în absenta unei supraîncarcari sincrone si chiar atunci când sunt suficiente resurse disponibile, performantele pot fi slabe datorita unei proaste reglari a sistemului.
+-Un alt element de reglare este potrivirea corecta a intervalelor de limita de timp. Atunci când este
+-trimis un TPDU, în mod normal se pozitioneaza un contor pentru a evita pierderea TPDU-lui.
+-Daca limita de timp este prea scurta, se vor produce retransmisii inutile, obturând cablurile. Daca
+-limita de timp este prea lunga, se vor introduce întârzieri inutile dupa pierderea unui TPDU. Alti
+-parametri ce pot fi reglati sunt lungimea intervalului de timp dupa care datele acumulate sunt confirmate, si numarul retransmisiilor facute înainte de a se renunta.
+-O marime utila de reamintit când se analizeaza performantele retelei este produsul largime de banda-întârziere. El este obtinut prin înmultirea largimii de banda (în biti pe secunda) cu întârzierea traseului dus-întors (în secunde). Produsul reflecta capacitatea conductei de la emitator la receptor si înapoi (în biti).
+-Concluzia care poate fi trasa aici este ca pentru atingerea unor performante bune, fereastra receptorului trebuie sa fie cel putin la fel de mare ca si produsul largime de banda-întârziere, preferabil chiar putin mai mare, deoarece receptorul poate sa nu raspunda instantaneu. 
+-O alta problema de performanta care poate aparea în aplicatiile critice din punctul de vedere al timpului, precum audio/video, este zgomotul. Un timp mediu de transmisie de valoare mica nu este suficient. Este necesara si o deviatie standard mica.
+-
+-
+-4.	Prelucrarea rapida TPDU.
+-
+-Principalul obstacol catre retelele rapide îl constituie programul de protocol. Exista câteva modalitati pentru a creste viteza acestui program. 
+-Supraîncarcarea indusa de prelucrarea TPDU-urilor are doua componente: supraîncarcare per
+-TPDU si supraîncarcare per octet. Cheia accelerarii prelucrarii TPDU-urilor consta în separarea cazului normal (transferul datelor într-un singur sens) si tratarea sa speciala. Cu toate ca este necesara o secventa de TPDU-uri speciale pentru a se intra într-o stare STABILIT, odata intrat în starea respectiva, prelucrarea TPDU-urilor decurge lin, pâna în clipa în care una din parti initiaza închiderea conexiunii.
+-Calea rapida de la emitator la receptor este indicata printr-o linie groasa.
+-Pasii de prelucrare ai acestei cai sunt reprezentati prin dreptunghiuri umbrite. În cazul obisnuit, antetele mai multor date TPDU consecutive sunt în mare parte identice. Pentru a profita de acest lucru, în interiorul entitatii transport se memoreaza un antet prototip. La începutul caii rapide, el este copiat cât de repede posibil într-un tampon special, cuvânt cu cuvânt. Acele câmpuri care ulterior se modifica de la un TPDU la altul sunt suprascrise în tampon. În mod frecvent, aceste câmpuri sunt usor de derivat din variabilele de stare, de exemplu urmatorul numar de secventa.
+-Apoi este pasat nivelului retea un indicator spre întregul antet TPDU, împreuna cu un indicator spre informatia utilizator. Si aici se poate urma aceeasi strategie. În final, nivelul
+-retea furnizeaza pachetul rezultat nivelului legatura de date, în vederea transmisiei.
+-Alte doua domenii unde se pot obtine câstiguri importante în performante sunt controlul tampoanelor si al contoarelor de timp. În controlul tampoanelor, ideea consta în evitarea copierilor inutile, asa cum s-a mentionat anterior. Controlul contoarelor de timp este important, deoarece aproape nici un contor nu expira de fapt. Acestea sunt pozitionate astfel încât sa ne pazeasca împotriva pierderii de TPDU-uri, dar majoritatea TPDU-urilor, ca si confirmarile lor, de altfel, ajung corect la destinatie. Este deci important sa se optimizeze controlul contoarelor de timp pentru cazul în care acestea expira rar.O schema uzuala consta în utilizarea unei liste îmbunatatite a evenimentelor generate de contoare, sortate în functie de momentul expirarii acestora. Intrarea din capatul acestei liste contine un contor care indica departarea în impulsuri de ceas fata de momentul expirarii. Fiecare din intrarile care urmeaza indica printr-un contor departarea în impulsuri de ceas fata de intrarea precedenta.
+-La fiecare impuls de ceas, contorul din capatul listei este decrementat. Atunci când contorul
+-atinge valoarea 0, se prelucreaza evenimentul asociat lui si urmatorul element din lista devine capatul listei. Contorul acestuia nu trebuie sa fie modificat. Prin aceasta schema, inserarea si stergerea evenimentelor sunt operatii costisitoare, cu un timp de executie proportional cu lungimea listei.

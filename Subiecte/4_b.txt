@@ -1,0 +1,35 @@
+b) Protocolul TCP ( Transport Comunication Protocol)
+- protocolul de transport la nivelul transport
+- accepta fluxuri locale, le imparte in fragmente ce nu depasesc  64 k octeti si expediaza fiecare fragment cu o datagrama IP separata .
+
+Antetul : vezi poza4b.png
+
+Lungimea antetului TCP – nr de 32 de biti care sunt continute in antetul TCP 
+URG – 1 daca Indicatorul Urgent este valid( indica deplasamentul in acteti fata de nr curent de secventa la care se gaseste inf urgenta )
+ACK – pe 1 daca Nr de Confirmare este valid. Daca e pe 0 campul Nr de Confirmare este ignorat
+PSH – inf fortata. Receptorul este ! RUGAT RESPECTUOS sa livreze inf respectiva imediat ce este primita 
+RST – utilizat pt a desfiinta o conexiune care a devenit inutilizabila datorita defectiunii unei msini. In general indica o problema 
+SYN – utilziata pt stabilirea unei conexiuni
+FIN – pentru a incheia o conexiune 
+Dimensiunea ferestrei – nr de octeti care poate sa fie transmis
+Suam de control – calc pt antet, informatia si peudo-antetul conceptual ( contine adresa IP a sursei, a destinatiei, nr de protocol TCP si nr de octeti al segmentului TCP)
+Optiunie – pt faciliati suplimentare. Cea mai imp este cea care permite  fiecarei masini sa specifice incarcarea maxima a inf utila TCP pe care este dispusa sa o accepte .
+
+Eliberarea conexiunii :
+-conexiunea bidirectionala
+-se inchide prin setarea bitului FIN ceea ce semnifica ca nici un mesaj nu o sa mai fie trimis
+-pentru a evita problema celor 2 armate sunt utilizate cronometrele 
+Controlul congestiei :
+-in zilele noastre depasirea timpilor de transmisie se datoreaza congestiei nu prin pierderea pachetelor 
+-pentru a preveni congestia fiecare emitator are 2 ferestre : cea acceptata de receptor si fereastra de congestie. Fiecare reflecta nr de octeti ce pot fi trimisi de catre emitator. Evident este ales minimul .
+-fereastra de congestie creste exponential pana cand se produce o depasire de timp sau se atinge dimensiunea ferestrei receptorului ( denumit algoritmul efortului(?) lent ).
+-pentru controlul congestiei el utilizeaza inca un parametru denumit prag. Cand apare o depasire de timp, pragul este pozitionat la jumatate din fereastra curenta de congestie si fereastra este repoz. la dim unui segment maxim. Apoi este utilizat startul lent, cresterea exponentiala oprindu-se odata ce  pragul este atins. Apoi creste binar pana cand atinge dim ferestrei receptorului daca nu mai apar intarzieri 
+Administrarea contorului de timp in TCP
+-cel mai imp contor : contorul de retransmisie
+-cand este trimis un segment se porneste un contor de retransmisie. Daca segmentul este confirmat inainte de expirarea timpului, contorul este oprit. Pe de alta parte, daca timpul expira inaintea primirii confirmarii segmentul este retransmis
+-este greu de estimat intervalul de intarziere. Se foloseste un alg. dinamic si este datorat lui Jacobson
+-pentru fiecare conexiune este pastrata o variabila RTT care este cea mai buna estimare a timpului in care se parcurge circuitul dus-intors
+-cand este transmis un segment, se porneste un contor de timp, atat pentru a vedea cat de mult dureaza pana la primirea confirmarii cat si pt o retransmisie in cazul scurgerii unui interval de timp prea lung. Daca se primeste confirmeaza TCP masoara cat de mult i-a trebuit confirmarii sa soseaza (fie acest timp M) : RTT=α*RTT+(1-α)*M(unde α=7/8)
+-pt segmentele retransmise nu se actualizeaza RTT. In loc de aceasta timpul de expirare este dublat la fiecare esec, pana cand segmentele ajung prima oara la destinatie .( Algoritmul lui Karu)
+-are si un contor de persistenta. Folosit sa previna interblocarea urm : receptorul trimite o dim 0 si spune emitatorului sa astepte. Pachetul care deblocheaza emitatorul se pierde .La expirarea contorului emitatorul trimite o sonda sa verifice. Daca dim este tot 0, contorul de persistenta este repozitionat .
+-contorul de mentinere in viata. Daca o conexiune este inactiva, contorul expira se forteaza o parte sa verifice daca cealalta mai exista. Daca nu mai e, o inchide .

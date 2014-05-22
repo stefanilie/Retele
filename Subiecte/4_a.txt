@@ -1,0 +1,46 @@
+4. Nivelul Transport
+       - are rolul de a transporta date de la masina sursa la masina destinatie 
+a) Caracteristici ale nivelului Transport (notiuni de baza: adresarea, stabilirea si eliberarea conexiunii, controlul fluxului, multiplexarea)
+
+Servicii furnizate nivelurilor superioare :
+	  - hardware-ul si software-ul care se ocupa cu transportul s.n. entitate de transport
+	  - serviciul orientat pe conexiune si datagrama (? nu inteleg prea bine ce scrie) din nivelul de retea se gasesc si aici ( precum si serviciul fara conexiune).
+                - avem nevoie si aici de aceste metode deoarece codul nivelului transport este executat de masinile utilizatorilor in timp ce codul nivelului retelei este executat de nivelul de transport 
+               - datorita acestui nivel, programatorii pot scrie cod care sa ruleze pe o mare varietate de retele fara sa isi puna problema interfetelor de subretea diferite sau transmisiilor nesigure.
+
+Adresarea :
+-	cand un proces aplicatie vrea sa stabileasca o legatura cu alt proces aflat la distanta el tb sa specifice cu care proces doreste sa se conecteze. Scest lucru se face prin porturi (TSAP – transport service acess point)
+-	exista un proces special numit server de nume. Utilizatorul stabileste o conexiune la acest server si specifica numele serviciului pe care il doreste. Serverul ii trimite adresa TSAP corespunzatoare, utilizatorul elibereaza conexiunea cu serverul de nume si stabileste o noua legatura cu serviciul dorit.
+-	un serviciu nou tb sa se inregistreze singur la serviciul de nume si sa ii furnizeze numele si TSAP-ul.
+Stabilirea conexiunii :
+-	pentru a elimina duplicatele din subretea , pachetele “imbatranite” sunt eliminate 
+-	o metoda ce elimina duplicatele este cea a lui Tombinson care propune ca fiecare masina sa aiba un ceas, Fiecare ceas este un contor binar care se autoincrementeaza. Nr de biti ai contorului tb sa fie egal cu nr de biti al nr de secventa. Ceasul tb sa continue sa functioneze si in cazul in care PC-ul cade.
+-	ideea este ca 2 TPDU sa nu fie numerotate identic. Cand conexiunea este stabilita k cei mai nesemnificanti biti ai ceasului sunt folositi ca nr initial de secventa. Spatiul nr de secventa ar tb sa fie suficient de mare pentru ca, in timpul scurs pana cand contorul ajunge din nou la acelasi nr toate TPDU-urile vechi cu acel nr au disparut.
+-	trebuie sa luam masuri ca nr de secventa sa nu fie folosite un timp inaintea utilizarii lor ca noi nr de secventa. Aceasta regiune este denumita “regiunea interzisa”
+-	metoda aceasta rezolva problema TPDU-urilor intarziate insa pt a o putea folosi tb sa stabilim o conexiune inainte 
+-	pt a evita problemele la conectare folosim Tombinson propune “ 3 way-handshake” :
+             --  gazda  1 alege un nr de secventa  X si trimite TPDU CONNECTION REQUEST care contine X gazdei 2
+                  --  gazda 2 raspunde cu connection ack  confirmand si anuntand  numarul sau initial de secventa Y
+                  -- gazda 1 confirma alegerea lui Y gazdei 2 cu primul mesaj pe care o trimite 
+
+Eliberarea conexiunii : 
+-	2 moduri  :  -- simetrica (conexiuni unidirectionale si tb sa fie inchise separat )
+                       -- asimetrica 
+-	sa inchidem o conexiune fara pierderi de date este imposibil
+-	avem 3 cazuri  : 
+1)	Un utilizator trimite DR(disconnect request). Receptorul  primeste si porneste un ceas pt a trata cazul in care mesajul sau este pierdut. Emitatorul, la primirea confirmarii, termina conexiunea si apoi si receptorul.
+2)	Al doilea DR este pierdut : utilizatorul care a dat DR retrimite mesajul dupa expirarea timpului. consideram acum ca toate ajung normal.
+3)	Nici un DR nu ajunge, dupa ce conexiunea e eliberata. In acelasi timp si receptorul elibereaza.
+
+Controlul fluxului :
+-	pentru un trafic in rafala cu o banda de transfer ingusta, ca traficul produs de un terminal interactiv, tampoanele sunt alocate dinamic ( adica au lungime variabila si sunt create pe moment)
+-	initiatorul nu este sigur ca receptorul a reusit sa aloce un tampon la sosirea unui pachet asa ca emitatorul tb sa aiba o copie a TPDU transmis pana cand este confirmat.
+-	pentru un transfer de fisiere sau pentru orice alt trafic care necesita o banda de transfer larga este mai bine daca receptorul aloca un set intreg de tampoane, pentru a permite un flux de date la viteza maxima( adica are tampoane prealocate cu o marime egala cu marimea max a unui TPDU care poate sa fie primit ).
+-	alocarea dinamica inseamna, de fapt, o fereastra cu dimensiune variabila. La inceput, emitatorul trimite cereri pentru un anumit numar de tampoane bazandu-se pe o estimare a necesitatilor. Receptorul 0 ii aloca atatea tampoane cat isi poate permite.Cand emitatorul trimite un TPDU, receptorul decrementeaza nr de tampoane pe care le are alocate, oprindu-se cand acest nr devine 0. Receptorul trimite inapoi confirmari si situatia tampoanelor alocate, impreuna cu traficul in sens invers.
+-	probleme pot sa apara si cand capacitatea retelei este mai mica decat rata emitatorului de a transmite mesaje 
+-	Balsens a propus folosirea unei scheme cu fereastra glisanta in care emitatorul modifica dinamic dimensiunea ferestrei pentru a o potrivi la capacitatea de transport a retelei. Daca reteaua poate sa transporte c TPDU-uri pe sec si durata unui ciclu este r atunci dim. ferestrei este c*r.(dimensiunea ferestrei se ajusteaza pe parcurs urmarind cei 2 param dupa care se poate calcula dim dorita a ferestrei)
+
+Multiplicarea :
+-	multiplicarea este necesara cand doar o singura adresa de retea este disponibila pe o gazda si toate conexiunile de transport tb sa o foloseasca
+-	cand un TPDU soseste este necesar un mod de a spune carui proces tb dat. Aceasta situatie este numita MULTIPLEXARE IN SUS.
+-	daca un utilizator are nevoie de mai multa latime de banda decat poate oferi un circuit virtual, o solutie este ca nivelul transport sa deschida mai multe conexiuni retea si sa distribuie traficul prin acestea. Acest mod de operare s.n. MULTIPLEXARE IN JOS.
