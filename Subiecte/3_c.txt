@@ -1,0 +1,21 @@
+ c) Algoritmi de evitare a congestionarii
+Prealocarea zonelor tampon 
+- este aplicabila CV si consta in rezervarea uneia sau mai multor zone tampon in fiecare nod intermediar la deschiderea circuitului .In lipsa de spatiu se alege o alta cale sau se rejecteaza cererea de stabilire a circuitului .
+	 
+Distrugerea pachetelor 
+- daca nu exista spatiul necesar memorarii pachetul receptionat de un nod este ignorat. Deoarece astfel se pot ignora pachete de confirmare, care ar duce la eliberarea spatiului ocupat de pachetele confirmate , se mentine cel putin un tampon de receptie pentru fiecare linie, permitandu-se inspectarea pachetelor primite. De asemenea,se poate limita nr zonelor de tampon de transmisie ale fiecarei linii .	  
+	
+Pachete de permisiune
+- se initializeaza reteaua cu pachete de permisiune(in nr fix) . Cand un nod vrea sa transmita, el captureaza un pachet de permisiune si trimite in locul lui un pachet de date .   Se garanteaza astfel ca nr max de pachete nu depaseste nr de pachete de permisiune , fara a se asigura distribuirea lor conform necesitatilor nodurilor. In plus pierderea pachetelor de permisiune conduce la scaderea capcitatii retelei
+ 
+Pachete de soc
+- sunt transmise de comutatoare surselor de date pentru a micsora rata de generare a pachetelor
+
+Evitarea blocarii definitive
+- blocarea reprezinta o situatie limita a unei retele congestionate , cand lipsa de spatiu impiedica transmiterea vreunui pachet
+- o solutie este utilizarea in fiecare nod a m+1 zone tampon si fiind lungimea max a cailor retelei
+- o alta solutie este pastrarea pt fiecare pachet o informatie de vechime.
+La comunicarea dintre 2 noduri A si B putem intalnii situatiile scrum : 
+- B are un tampon liber si poate primi cel mai vechi pachet al lui A catre B
+- B nu are tampon liber dar are un pachet pt A si poate sa primeasca cel mai vechi pachet al lui A catre B
+- B nu are niciun tampon liber si nici un pachet catre A. In acest caz B este fortat sa transmita lui A un pachet la alegere si sa primeasca pachetul lui A.

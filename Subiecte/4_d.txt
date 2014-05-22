@@ -1,0 +1,37 @@
+
+  d) Protocolul IP
+  
+  |______________|________|_______________________________|_____________________|
+  | '    '    '  | '    ' |    '   '    ' |/ / /|  '    '    '    '  '     '    |
+  | Versiune     | IHL    | Tip serviciu  | / / | Lungimea totala               |
+  |______________|________|_______________|/_/_/|_______________________________|
+  |             Identificare                    |/ /| D | H | Deplasamentul     |
+  |                                             | / |---|---|  fragmentului     |
+  |_____________________________________________|_/_|_F_|_F_|___________________|
+  |   Timp de viata      |     Protocol         |     Suma de control           |
+  |______________________|______________________|_______________________________|
+  |                            Adresa sursa                                     |             |
+  |_____________________________________________________________________________| 
+  |                           Adresa destinatie                                 |
+  |_____________________________________________________________________________|
+  |                              Optiuni                                        |
+  |_____________________________________________________________________________|
+  
+Campul Versiune memoreaza carei versiuni ii apartine(IPv4 , IPv6)
+IHL - spune cat de lung este antetul
+Tip serviciu - indica careia dintre clasele de servicii apartine pachetul si isi stabileste prioritatile
+Lungime totala - include antet+data
+Identificare - permite gazdei destinatie sa stie carei driagrame ii apartine un nou pachet primit 
+Un bit nefolosit apoi DF(don't fragment) apoi MF(more fragments ).
+Deplasamentul fragmentului - locul fragmentului curent in cadrul datagramei
+Timp de viata - limiteaza durata de viata a pachetelor
+Suma de control a antetului - detecteaza erorile generate de locatii de numere proaste din interiorul unui ruter.
+Adresa sursa si adresa destinatie - nr de retea si nr de gazda.
+Optiuni - include inf care nu sunt prezente in proiectul original
+     -> securitate - cat de secreta e inf
+	 ->dirijare stricta de la sursa - dirijeaza mersul pachetului de date pt o succesiune de adrese ip.]
+	 -> dirijare aproximativa de la sursa - pachetul traverseaza o lista specificata dar este permisa trecerea prin 
+alte rutere pe drum.
+     -> inregistreaza calea - in campul optiune se pun adresele ip al altor rutere
+	 -> amprenta de timp - inregistreaza calea + timp .
+  

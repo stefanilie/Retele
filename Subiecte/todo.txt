@@ -1,0 +1,93 @@
+
+Dirijarea ierarhica 
+    
+  - utilizata pentru retele de mari dimensiuni la care tabelele de dirijare ar fi voluminoase 
+  - comutatoarele sunt grupate in regiuni , fiecare comutator cunoscand detaliat caile din regiunea
+ proprie , dar necunoscand structura interna a altor regiuni 
+  - 2 regiuni sunt conectate prin conectarea unui anumit nod din a 2a regiune 
+  -tabela de dirijare se reduce avand pentru fiecare nod din regiunea proprie si cate o intrare
+ pentru fiecare din celelalte regiuni 
+
+    
+Dirijarea cu difuzare
+  
+  In dirijarea multidestinatie  pachetul contine o lista cu adresele destinatarilor.
+  Cand pachetul ajunge la un comutator , acesta determina , pe baza adreselor ,pe ce linii tb 
+ sa transmita in continuare pachetul , partitionand totodata lista adreselor intre duplicatele
+ transmise pe aceste linii .
+  Se poate utiliza orice arbore de acoperire minimal .
+  Ca alternativa , algoritmul se poate baza pe urmarirea cailor inverse .
+  Ea este acceptata , iar comutatorul o transmite in continuare pe fiecare linie cu exceptia celei 
+  pe care a sosit .
+
+ c) Algoritmi de evitare a congestionarii
+  
+  Prealocarea zonelor tampon 
+   - este aplicabila CV si consta in rezervarea uneia sau mai multor zone tampon in fiecare
+  nod intermediar la deschiderea circuitului .In lipsa de spatiu se alege o alta cale sau se rejecteaza
+  cererea de stabilire a circuitului .
+	 
+  Distrugerea pachetelor 
+   - daca nu exista spatiul necesar memorarii pachetul receptionat de un nod este ignorat .
+   Deoarece astfel se pot ignora pachete de confirmare, care ar duce la eliberarea spatiului
+   ocupat de pachetele confirmate , se mentine cel putin un tampon de receptie pentru fiecare 
+   linie , permitandu-se inspectarea pachetelor primite. De asemenea,se poate limita nr zonelor
+   de tampon de transmisie ale fiecarei linii .	  
+	
+  Pachete de permisiune
+   - se initializeaza reteaua cu pachete de permisiune(in nr fix) . Cand un nod vrea sa transmita,
+   el captureaza un pachet de permisiune si trimite in locul lui un pachet de date . 
+   Se garanteaza astfel ca nr max de pachete nu depaseste nr de pachete de permisiune , fara a se 
+   asigura distribuirea lor conform necesitatilor nodurilor. In plus pierderea pachetelor de permisiune
+   conduce la scaderea capcitatii retelei
+ 
+  Pachete de soc
+   - sunt transmise de comutatoare surselor de date pentru a micsora rata de generare a pachetelor
+   
+  Evitarea blocarii definitive
+   -  blocarea reprezinta o situatie limita a unei retele congestionate , cand lipsa de spatiu impiedica
+   transmiterea vreunui pachet
+   - o solutie este utilizarea in fiecare nod a m+1 zone tampon si fiind lungimea max a cailor retelei
+   - o alta solutie este pastrarea pt fiecare pachet o informatie de vechime.
+   La comunicarea dintre 2 noduri A si B putem intalnii situatiile scrum : 
+    - B are un tampon liber si poate primi cel mai vechi pachet al lui A catre B
+	- B nu are tampon liber dar are un pachet pt A si poate sa primeasca cel mai vechi pachet al lui A catre B
+	- B nu are niciun tampon liber si nici un pachet catre A. In acest caz B este fortat sa transmita lui A un 
+	pachet la alegere si sa primeasca pachetul lui A.
+	
+  d) Protocolul IP
+  
+  |______________|________|_______________________________|_____________________|
+  | '    '    '  | '    ' |    '   '    ' |/ / /|  '    '    '    '  '     '    |
+  | Versiune     | IHL    | Tip serviciu  | / / | Lungimea totala               |
+  |______________|________|_______________|/_/_/|_______________________________|
+  |             Identificare                    |/ /| D | H | Deplasamentul     |
+  |                                             | / |---|---|  fragmentului     |
+  |_____________________________________________|_/_|_F_|_F_|___________________|
+  |   Timp de viata      |     Protocol         |     Suma de control           |
+  |______________________|______________________|_______________________________|
+  |                            Adresa sursa                                     |             |
+  |_____________________________________________________________________________| 
+  |                           Adresa destinatie                                 |
+  |_____________________________________________________________________________|
+  |                              Optiuni                                        |
+  |_____________________________________________________________________________|
+  
+  Campul Versiune memoreaza carei versiuni ii apartine(IPv4 , IPv6)
+  IHL - spune cat de lung este antetul
+  Tip serviciu - indica careia dintre clasele de servicii apartine pachetul si isi stabileste prioritatile
+  Lungime totala - include antet+data
+  Identificare - permite gazdei destinatie sa stie carei driagrame ii apartine un nou pachet primit 
+  Un bit nefolosit apoi DF(don't fragment) apoi MF(more fragments ).
+  Deplasamentul fragmentului - locul fragmentului curent in cadrul datagramei
+  Timp de viata - limiteaza durata de viata a pachetelor
+  Suma de control a antetului - detecteaza erorile generate de locatii de numere proaste din interiorul unui ruter.
+  Adresa sursa si adresa destinatie - nr de retea si nr de gazda  .
+  Optiuni - include inf care nu sunt prezente in proiectul original
+     -> securitate - cat de secreta e inf
+	 ->dirijare stricta de la sursa - dirijeaza mersul pachetului de date pt o succesiune de adrese ip.]
+	 -> dirijare aproximativa de la sursa - pachetul traverseaza o lista specificata dar este permisa trecerea prin 
+alte rutere pe drum.
+     -> inregistreaza calea - in campul optiune se pun adresele ip al altor rutere
+	 -> amprenta de timp - inregistreaza calea + timp .
+  

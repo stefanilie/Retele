@@ -19,3 +19,18 @@ Deficientele sunt determinate de:
 1- vulnerabilitatea retelei, dependenta de functionare a centrului de control
 2- supraincarcarea traficului prin transmiterea rapoartelor si a tabelelor de dirijare
 3-utilizarea cu noduri, in anumite perioade, a unor tabele necorelate datorita receptiei la momente de timp distincte a noilor tabele
+
+
+Dirijarea ierarhica 
+    
+- utilizata pentru retele de mari dimensiuni la care tabelele de dirijare ar fi voluminoase 
+- comutatoarele sunt grupate in regiuni, fiecare comutator cunoscand detaliat caile din regiunea proprie, dar necunoscand structura interna a altor regiuni 
+- 2 regiuni sunt conectate prin conectarea unui anumit nod din a 2a regiune 
+- tabela de dirijare se reduce avand pentru fiecare nod din regiunea proprie si cate o intrare pentru fiecare din celelalte regiuni 
+
+    
+Dirijarea cu difuzare
+
+- In dirijarea multidestinatie pachetul contine o lista cu adresele destinatarilor.
+- Cand pachetul ajunge la un comutator, acesta determina, pe baza adreselor ,pe ce linii tb sa transmita in continuare pachetul, partitionand totodata lista adreselor intre duplicatele transmise pe aceste linii.
+- Se poate utiliza orice arbore de acoperire minimal. Ca alternativa, algoritmul se poate baza pe urmarirea cailor inverse. Ea este acceptata, iar comutatorul o transmite in continuare pe fiecare linie cu exceptia celei pe care a sosit.
