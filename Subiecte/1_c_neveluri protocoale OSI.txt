@@ -52,5 +52,4 @@ SESIUNE - permite utilizatorilor de pe masini diferite sa stabileasca sesiuni in
 PREZENTARE - sintaxa si semantica inf. transmisa
    |
 Aplicatie - protocoale frecvent utilizate (HTTP, WWW)
-
-Pentru ca m-a urcat in tanc cand aveam doar 6 ani si a inchis hublou doar ca sa ma sperie, pentru ca m-a dus la stadion si m-a invatat cine sunt Rush, Aldridge si Kenny, pentru ca bea de fiecare data cot la cot cu mine, pentru ca m-a invatat ce e mandria de a fi militar si nu in ultimul rand pentru ca de fiecare data ma scoate din depresie, de asta sa traiesi sanatos tata! La multe nume, si ficaț tari! 
+ 
