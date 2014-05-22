@@ -1,3 +1,5 @@
+a)	Aspecte (caracteristici, cerinte) ale proiectarii nivelului retea
+
 
 -Legatura de date asigura comunicarea corecta intre oricare 2 noduri adiacente unei retele de calculatoare.
 -transferul datelor intre 2 noduri neadiacente utilizeaza mai multe legaturi puse cap la cap.
@@ -11,4 +13,35 @@
 Serviciile orientate pe conexiuni:
 ----------------------------------
 -stabilirea sau desfiintarea unei conexiuni.
--ransferul n
+-transferul individual al pachetelor
+-pbtinerea unor inf despre transferul pachetelor catre o anumita destinatie
+-transmiterea unor rapoarte ale retelei catre nivelul transport, la producerea unor incidente
+-serviciile folosesc 2 tehnici diferite: cv (circuit virtual), datagrama
+
+CV:
+-se transmite un pachet initial care stabileste legatura
+-aceeasi ruta este folosita si de cecelalte pachete
+-fiecare pachet contine in antet nr circuitului logic si fiecare comutator are un tabel cu circuitele care il traverseaza
+-pe baza nr CV se determina o ntrare a tabelului, in care este specificata leg pe care pachetul va fi transmis.
+-la strabaterea unui CV, nodul sursa alege un numar de circuit disponibil in acel nod.
+-un CV este renumerotat in fiecare nod, coresp este pastrata in tabelul CV
+-renumerotarea implica modificarea nr cv din antet, in fiecare nod
+
+Datagrama
+---------
+-pachetele sunt dirijate independent fata de predecesoarele sale
+-pachetul tr sa contina adresa completa a destinatarului
+-fiecare comutator are un tabel de dirijare, indicand legatura pe care trebuie transpus pachetul cu functie de adresa destinatarului
+-la receptia unui pachet, comutatorul inspecteaza adresa destinatarului, determina intrarea coresp si de aici legatura pe care tr transmis in cont pachetul.
+-dirijarea datelor este (in fct de adaptarea la conditiile de trafic)
+->statica(atunci cand continutul tabelelor de dirijare este fix)
+->adaptiva(atunci cand continutul tabelelor se modifica in fct de traficul curent sau de topologia retelei)
+
+-dirijarea datelor este (in fct de locul unde se realizeaza calculele)
+->centralizata(un alg global ia decizii optime de dirijare)
+->izolata(utilizeaza in fiecare nod inf disponibile local)
+->distribuita(care utilizeaza o combinatie de info locale si globale)
+
+-dirijarea datelor este (dupa obiectivele urmarite)
+->algoritmii care asigura transmiterea pe calea cea mai scurta 
+-algoritmii care minimizeaza intarzierea medie globala de transmitere a pachetelor

@@ -1,0 +1,21 @@
+b) Calea cea mai scurta
+-----------------------
+-modelul retelei este cea a unui graf
+-asociem costuri muchiilor si putem calcula cea mai scurta cale dintre 2 noduri.
+-daca toate muchiile cu lungime 1(alegem calea cu mai putine noduri
+-Dijkstra gaseste caile cele mai scurte de la o sursa la toate celelalte noduri.
+-tr sa dispuna de lista nodurilo, costul muchiilor si legauri
+-calculeaza la fiecare iteratie cea mai scurta cale de la sursa la un nod al retelei
+
+Dirijarea centralizata
+-varianta a alg Roy floyd
+-la interatia k, A[i][j] va alea cea mai buna valoare a distantei fara folosirea nodurilor >k
+-a[i][j]=min(A[i][j], A[i][k]+A[k][j])
+-in cazul nostru, a contine tabelele de dirijare ale tuturor nodurilor: v[i][j] este nodul vecin lui i, pe calea cea mai scurta de la i la j. Linia i a tabloului este babelul de dirijare al nodului i, iar linia i a lui A este tabelul costurilor min coresp.
+-poate sa fie folosit pentru adaptarea dirijarea la modificarile de trafic sau topologie.
+-un centru de control al dirijarii primeste de la comutatoarele de pachete rapoarte periodice despre starea locala, calculeaza noile tabele pentru fiecare comutator si le transmite acestora
+
+Deficientele sunt determinate de:
+1- vulnerabilitatea retelei, dependenta de functionare a centrului de control
+2- supraincarcarea traficului prin transmiterea rapoartelor si a tabelelor de dirijare
+3-utilizarea cu noduri, in anumite perioade, a unor tabele necorelate datorita receptiei la momente de timp distincte a noilor tabele

@@ -7,13 +7,15 @@
 --Spatiul de nume DNS
 
 -internetul este divizat in peste 200 de domenii de nivel superior. Fiecare domeniu este partitionat in subdomenii s.a.m.d (ca un arbore)
--primul nivel : - generice( .com (comercial) , .edu ( educational) , .gov (guvernamental) si .org ( organizatii non profit)
-                - de tari ( o intrare pentru fiecare tara)
+-primul nivel : 
+-> generice( .com (comercial) , .edu ( educational) , .gov (guvernamental) si .org ( organizatii non profit)
+-> de tari ( o intrare pentru fiecare tara)
 -de atunci s-au mai adaugat si alte domenii de nivel (
 -calea prin arbore trebuie specificata prin puncte de exemplu : eng.sun.com
 -acest lucru este necesat pentru a nu se intra in conflict cu nume de genul eng.yale.edu ( dep de engleza de la Yale)
--numele sunt : absolute (se termina cu . ex: eng.sum.com.)
-               relative ( fara punct la sfarsit : eng.sum.com )
+-numele sunt : 
+->absolute (se termina cu . ex: eng.sum.com.)
+->relative ( fara punct la sfarsit : eng.sum.com )
 -numele au maxim 63 de caractere. Cu tot cu cale maxim 256 caractere.
 -nu conteaza daca e litera mare sau mica
 -pentru a crea un nou domeniu se cere permisiunea domeniului in care va fi inclus
@@ -45,6 +47,16 @@
 |  NINFO |   Descriere sistem gazda        |   Unitate centrala si SO             |
 |  TXT   |    Text                         |   Text ASCII neinterpretat           |
 -----------------------------------------------------------------------------------
+
+TIP->SEMNIFICATIE->VALOARE
+1)SOA->Star autoritate->Parametrii pentru aceasta zona
+2)A->Adresa IP a unui sistem gazda->Intreg pe 32 de biti
+3)MX->Schimb de posta->Prioritate, domeniu dispus pt posta
+4)NS->Server de nume->Numele serverului pentru acest dom
+5)CNAME->Nume canonic->Numele domeniului
+6)PTR->pointer->Pseudonim pt ip
+7)NINFO->Descriere sistem gazda->Unitate centrala si SO
+8)TXT->Text->Text ASCII neinterpretat
 
 --Servere de nume
 
